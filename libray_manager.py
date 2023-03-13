@@ -1,66 +1,12 @@
-class Node:
-    def __init__(self, data):
-        self.data = data
-        self.next = None
-        self.previous = None
-
-class DoubleList:
-    def __init__(self):
-        self.head = None
-        self.size = 0
-
-    def append(self, elemento): 
-        new_node = Node(elemento)
-
-        if self.head == None:
-            self.head = new_node
-        else:
-            pointer = self.head
-            while pointer.next != None:
-                pointer = pointer.next
-            pointer.next = new_node
-        self.size += 1
-
-    def __len__(self):
-        return self.size
-    
-    def __getitem__(self, index):
-        pointer = self.head
-        for i in range(index):
-            pointer = pointer.next
-        return pointer.data
-
-    def index(self, elemento):
-        pointer = self.head
-        index = 0
-
-        while pointer != None:
-            if pointer.data == elemento:
-                return index
-            pointer = pointer.next
-            index += 1
-        else:
-            print('Ainda não há livros na biblioteca.')
-
-    def __repr__(self):
-        r = ''
-        pointer = self.head
-
-        while pointer != None:
-            r += str(pointer.data) + '\n'
-            pointer = pointer.next
-        return r
-    
-    def __str__(self):
-        return self.__repr__()
+from Double_list import *
 
 print('SEJA BEM VINDO AO "LIBRARY MANAGER", ESPERO SER ÚTIL E AJUDÁ-LO NO QUE PRECISAR ;)')
 
-lista_livros = DoubleList()
-lista_autores = DoubleList()
-lista_datas = DoubleList()
-lista_genero = DoubleList()
-lista_isbn = DoubleList()
+lista_livros = DoubleLinkedList()
+lista_autores = DoubleLinkedList()
+lista_datas = DoubleLinkedList()
+lista_genero = DoubleLinkedList()
+lista_isbn = DoubleLinkedList()
 
 while True:
 
@@ -73,6 +19,7 @@ while True:
         5) Visualizar todos os livros disponíveis
         6) SAIR
         ''')
+    
     escolha = input('Selecione uma opção: ')
     print('='*50)
 
@@ -92,7 +39,23 @@ while True:
         print(f'Livro "{livro}" adiconado com sucesso!')
 
     elif escolha == '2':
-        remove = input('Qual livro você deseja remover? ')
+        excluir = input('Qual livro você deseja remover? ')
+
+        index_remover = lista_livros.index(excluir)
+
+        try:
+            
+            lista_livros.remove(index_remover)
+            lista_autores.remove(index_remover)
+            lista_datas.remove(index_remover)
+            lista_genero.remove(index_remover)
+            lista_isbn.remove(index_remover)
+
+            print(f'Livro "{excluir}" removido com sucesso!')
+
+        except TypeError:
+            print(f'O livro "{excluir} não existe nesta biblioteca, logo, não tem como removê-lo')
+
 
     elif escolha == '3':
         busca = input('Qual livro você procura? ')
