@@ -9,13 +9,13 @@ class DoubleList:
         self.head = None
         self.size = 0
 
-    def append(self, elemento): #[9, 10, 8]
+    def append(self, elemento): 
         new_node = Node(elemento)
+
         if self.head == None:
             self.head = new_node
         else:
             pointer = self.head
-
             while pointer.next != None:
                 pointer = pointer.next
             pointer.next = new_node
@@ -23,6 +23,25 @@ class DoubleList:
 
     def __len__(self):
         return self.size
+    
+    def __getitem__(self, index):
+        pointer = self.head
+        for i in range(index):
+            pointer = pointer.next
+        return pointer.data
+
+    def index(self, elemento):
+        pointer = self.head
+        index = 0
+
+        while pointer != None:
+            if pointer.data == elemento:
+                return index
+            pointer = pointer.next
+            index += 1
+        else:
+            print('Ainda não há livros na biblioteca.')
+
     def __repr__(self):
         r = ''
         pointer = self.head
@@ -37,7 +56,11 @@ class DoubleList:
 
 print('SEJA BEM VINDO AO "LIBRARY MANAGER", ESPERO SER ÚTIL E AJUDÁ-LO NO QUE PRECISAR ;)')
 
-lista = DoubleList()
+lista_livros = DoubleList()
+lista_autores = DoubleList()
+lista_datas = DoubleList()
+lista_genero = DoubleList()
+lista_isbn = DoubleList()
 
 while True:
 
@@ -54,17 +77,47 @@ while True:
     print('='*50)
 
     if escolha == '1':
-        adiciona = input('Qual livro você deseja adicionar à coleção? ')
-        lista.append(adiciona)
-        print(f'Livro "{adiciona}" adiconado com sucesso!')
+        livro = input('Qual livro você deseja adicionar à coleção? ')
+        autor = input('Autor(a) do livro: ')
+        data_publicação = input('Data de publicação?: ')
+        genero = input('Gênero: ')
+        isbn = input('Código de ISBN: ')
+
+        lista_livros.append(livro)
+        lista_autores.append(autor)
+        lista_datas.append(data_publicação)
+        lista_genero.append(genero)
+        lista_isbn.append(isbn)
+
+        print(f'Livro "{livro}" adiconado com sucesso!')
+
     elif escolha == '2':
         remove = input('Qual livro você deseja remover? ')
+
     elif escolha == '3':
         busca = input('Qual livro você procura? ')
+
+        try:
+            i = lista_livros.index(busca)
+            print(f'Livro: {busca}')
+            print(f'Autor: {lista_autores[i]}')
+            print(f'Data de publicação: {lista_datas[i]}')
+            print(f'Gêneros: {lista_genero[i]}')
+            print(f'ISBN: {lista_isbn[i]}')
+
+        except TypeError:
+            print('Este livro não se encontra na biblioteca.')
+
     elif escolha == '4':
-        print(f'Esta biblioteca possui ao todo {len(lista)} livros.')
+        print(f'Esta biblioteca possui ao todo {len(lista_livros)} livros.')
+
     elif escolha == '5':
-        print(lista)
+        if len(lista_livros) == 0:
+            print('Ainda não há livros nessa biblioteca')
+        else:
+            for i in range(len(lista_livros)):
+                print(f'{i+1} - {lista_livros[i]}')
+
     elif escolha == '6':
         break
 
