@@ -23,29 +23,8 @@ class DoubleLinkedList:
             new_node.next = None
         self.size += 1
 
-    def __len__(self):
-        return self.size
-    
-    def __getitem__(self, index):
-        pointer = self.head
-        for i in range(index):
-            pointer = pointer.next
-        return pointer.data
-
-    def index(self, elemento):
-        pointer = self.head
-        index = 0
-
-        while pointer != None:
-            if pointer.data == elemento:
-                return index
-            pointer = pointer.next
-            index += 1
-        else:
-            print('Ainda não há livros na biblioteca.')
-
     def remove(self, index: int): 
-        if index == 0:
+        if (index == 0):
             pointer = self.head
             if self.head.next != None:
                 self.head = self.head.next
@@ -58,20 +37,41 @@ class DoubleLinkedList:
         position = 1
         previous = self.head
         pointer = self.head.next
-
-        while position < index:
+        while (position < index):
             previous = pointer
             pointer = pointer.next
             position = position + 1
         
-        if pointer.next != None:
+        if (pointer.next != None):
             previous.next = pointer.next
             pointer.next.previous = pointer.previous
         else:
             previous.next = None
+            pointer.previous = None
 
         self.size -= 1
         return pointer
+        
+    def __len__(self):
+        return self.size
+    
+    def __getitem__(self, index):
+        pointer = self.head
+        
+        for i in range(index):
+            if pointer != None:
+                pointer = pointer.next
+        return pointer.data
+
+    def index(self, elemento):
+        pointer = self.head
+        index = 0
+
+        while pointer != None:
+            if pointer.data == elemento:
+                return index
+            pointer = pointer.next
+            index += 1
     
     def __repr__(self):
         r = ''
