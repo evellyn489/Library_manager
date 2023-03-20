@@ -1,3 +1,5 @@
+from prettytable import PrettyTable
+
 class Book:
     def __init__(self, nome, autor, publicacao, genero, ibsn):
         self.nome = nome
@@ -72,20 +74,20 @@ class DoubleLinkedList:
         if pointer == None:
             print("Livro não encontrado na biblioteca.")
         else:
-            print("Nome do livro: " + pointer.nome)
-            print("Autor: " + pointer.autor)
-            print("Data de publicação: " + str(pointer.publicacao))
-            print('Gênero: ' + str(pointer.genero))
-            print('IBSN: ' + str(pointer.ibsn))
+            table = PrettyTable(["\033[1;31mNome do livro\033[m", "\033[1;31mAutor\033[m", "\033[1;31mAno de publicação\033[m", "\033[1;31mGênero\033[m", "\033[1;31mIBSN\033[m"])
+            table.add_row([str(pointer.nome), str(pointer.autor), str(pointer.publicacao), str(pointer.genero), str(pointer.ibsn)]) 
+            print(table)
     
     def __repr__(self):
-        r = ''
+        table = PrettyTable(["\033[1;31mNome do livro\033[m", "\033[1;31mAutor\033[m", "\033[1;31mAno de publicação\033[m", "\033[1;31mGênero\033[m", "\033[1;31mIBSN\033[m"])
         pointer = self.head
 
         while pointer != None:
-            r += f'Nome do livro: {str(pointer.nome)} | Autor: {str(pointer.autor)} | Ano de publicação: {str(pointer.publicacao)} | Gênero: {str(pointer.genero)} | ISBN: {str(pointer.ibsn)}' + '\n'
+            table.add_row([str(pointer.nome), str(pointer.autor), str(pointer.publicacao), str(pointer.genero), str(pointer.ibsn)]) 
             pointer = pointer.next
-        return r
+        
+        return str(table)
     
     def __str__(self):
         return self.__repr__()
+    

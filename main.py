@@ -1,11 +1,13 @@
 from Double_list import *
+from time import sleep
 
-print('SEJA BEM VINDO AO "LIBRARY MANAGER", ESPERO SER ÚTIL E AJUDÁ-LO NO QUE PRECISAR ;)')
+print('\033[31mSEJA BEM VINDO AO "LIBRARY MANAGER", ESPERO SER ÚTIL E AJUDÁ-LO NO QUE PRECISAR ;)\033[m')
 
 books = DoubleLinkedList()
 
 while True:
 
+    sleep(5)
     print('='*50)
     print('''O QUE VOCÊ DESEJA FAZER?
         1) Adicionar um novo livro
@@ -20,17 +22,17 @@ while True:
     print('='*50)
 
     if escolha == '1':
-        livro = input('Qual livro você deseja adicionar à coleção? ')
-        autor = input('Autor(a) do livro: ')
+        livro = input('Qual livro você deseja adicionar à coleção? ').strip().title()
+        autor = input('Autor(a) do livro: ').strip().title()
         data_publicação = input('Data de publicação?: ')
-        genero = input('Gênero: ')
+        genero = input('Gênero: ').strip().title()
         isbn = input('Código de ISBN: ')
 
         books.append(livro, autor, data_publicação, genero, isbn)       
-        print(f'Livro "{livro}" adiconado com sucesso!')
+        print(f'Livro "\033[31m{livro}\033[m" adiconado com sucesso!')
 
     elif escolha == '2':
-        excluir = input('Qual livro você deseja remover? ')
+        excluir = input('Qual livro você deseja remover? ').strip().title()
 
         books.remove(excluir)
         
@@ -42,7 +44,7 @@ while True:
             print(books)
     
     elif escolha == '3':
-        busca = input('Qual livro você procura? ')
+        busca = input('Qual livro você procura? ').strip().title()
         books.search(busca)
 
 
@@ -57,4 +59,4 @@ while True:
     elif escolha == '6':
         break
 
-print('Espero que tenha gostado :) Volte sempre!')
+print('\033[31mEspero que tenha gostado :) Volte sempre!\033[m')
