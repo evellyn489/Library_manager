@@ -1,12 +1,12 @@
 from prettytable import PrettyTable
 
 class Book:
-    def __init__(self, nome, autor, publicacao, genero, ibsn):
+    def __init__(self, nome, autor, publicacao, genero, isbn):
         self.nome = nome
         self.autor = autor
         self.publicacao = publicacao
         self.genero = genero
-        self.ibsn = ibsn
+        self.isbn = isbn
         self.previous = None
         self.next = None
 
@@ -16,24 +16,27 @@ class DoubleLinkedList:
         self.previous = None
         self.size = 0
 
-    def append(self, nome, autor, publicacao, genero, ibsn):
-        new_book = Book(nome, autor, publicacao, genero, ibsn)
-
-        if self.head == None:
-            self.head = new_book
-            self.previous = new_book
+    def append(self, nome, autor, publicacao, genero, isbn):
+        new_book = Book(nome, autor, publicacao, genero, isbn)
+        
+        if self.head != None:
+            pointer = self.head
+            while pointer.next != None:
+                pointer = pointer.next
+            pointer.next = new_book
+            new_book.previous = pointer
+            new_book.next = None
         else:
-            new_book.next = self.head
-            self.head.previous = new_book
             self.head = new_book
         self.size += 1
+            
 
     def remove(self, livro):
         pointer = self.head
         encontrado = False
 
         while pointer != None and not encontrado:
-            if pointer.nome == livro:
+            if pointer.nome == livro or pointer.isbn == livro:
                 encontrado = True
             else:
                 pointer = pointer.next
@@ -67,7 +70,7 @@ class DoubleLinkedList:
         pointer = self.head
         encontrado = False
         while pointer != None and not encontrado:
-            if pointer.nome == livro:
+            if pointer.nome == livro or pointer.isbn == livro:
                 encontrado = True
             else:
                 pointer = pointer.next
@@ -75,7 +78,7 @@ class DoubleLinkedList:
             print("Livro não encontrado na biblioteca.")
         else:
             table = PrettyTable(["\033[1;31mNome do livro\033[m", "\033[1;31mAutor\033[m", "\033[1;31mAno de publicação\033[m", "\033[1;31mGênero\033[m", "\033[1;31mIBSN\033[m"])
-            table.add_row([str(pointer.nome), str(pointer.autor), str(pointer.publicacao), str(pointer.genero), str(pointer.ibsn)]) 
+            table.add_row([str(pointer.nome), str(pointer.autor), str(pointer.publicacao), str(pointer.genero), str(pointer.isbn)]) 
             print(table)
     
     def __repr__(self):
@@ -83,11 +86,10 @@ class DoubleLinkedList:
         pointer = self.head
 
         while pointer != None:
-            table.add_row([str(pointer.nome), str(pointer.autor), str(pointer.publicacao), str(pointer.genero), str(pointer.ibsn)]) 
+            table.add_row([str(pointer.nome), str(pointer.autor), str(pointer.publicacao), str(pointer.genero), str(pointer.isbn)]) 
             pointer = pointer.next
         
         return str(table)
     
     def __str__(self):
         return self.__repr__()
-    

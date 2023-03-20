@@ -12,7 +12,7 @@ while True:
     print('''O QUE VOCÊ DESEJA FAZER?
         1) Adicionar um novo livro
         2) Remover/reservar/emprestar um livro da coleção
-        3) Buscar livro por nome
+        3) Buscar livro por nome ou código de ISBN
         4) Visualizar a quantidade de livros disponíveis
         5) Visualizar todos os livros disponíveis
         6) SAIR
@@ -35,26 +35,19 @@ while True:
         excluir = input('Qual livro você deseja remover? ').strip().title()
 
         books.remove(excluir)
-        
-        
-    elif escolha == '5':
-        if len(books) == 0:
-            print('Ainda não há livros nessa biblioteca!')
-        else:
-            print(books)
     
     elif escolha == '3':
-        busca = input('Qual livro você procura? ').strip().title()
+        busca = input('Qual livro você procura? Digite o nome ou o código de ISBN').strip().title()
         books.search(busca)
-
 
     elif escolha == '4':
         print(f'Esta biblioteca possui ao todo {len(books)} livros.')
 
     elif escolha == '5':
         if len(books) == 0:
-            print('Ainda não há livros nessa biblioteca')
-        print(books)
+            print('Ainda não há livros nessa biblioteca!')
+        else:
+            print(books)
     
     elif escolha == '6':
         break
