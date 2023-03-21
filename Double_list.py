@@ -60,7 +60,7 @@ class DoubleLinkedList:
                 pointer.previous.next = pointer.next
                 pointer.next.previous = pointer.previous
 
-            print(f'Livro "{livro} removido com sucesso!')
+            print(f'Livro "\033[31m{livro}\033[m" removido com sucesso!')
             self.size -= 1
 
     def __len__(self):
