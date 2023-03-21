@@ -49,8 +49,6 @@ class DoubleLinkedList:
                 self.head = pointer.next
                 if self.head != None:
                     self.head.previous = None
-                else:
-                    self.previous = None
 
             elif pointer == self.previous:
                 self.previous = pointer.previous
@@ -58,7 +56,8 @@ class DoubleLinkedList:
 
             else:
                 pointer.previous.next = pointer.next
-                pointer.next.previous = pointer.previous
+                if pointer.next != None:
+                    pointer.next.previous = pointer.previous
 
             print(f'Livro "\033[31m{livro}\033[m" removido com sucesso!')
             self.size -= 1
