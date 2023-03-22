@@ -11,7 +11,7 @@ while True:
     print('''O QUE VOCÊ DESEJA FAZER?
         1) Adicionar um novo livro
         2) Remover/reservar/emprestar um livro da coleção
-        3) Buscar livro por nome ou código de ISBN
+        3) Buscar livro por nome ou código de IBSN
         4) Visualizar a quantidade de livros disponíveis
         5) Visualizar todos os livros disponíveis
         6) SAIR
@@ -25,10 +25,10 @@ while True:
         autor = input('Autor(a) do livro: ').strip().title()
         data_publicação = input('Data de publicação?: ')
         genero = input('Gênero: ').strip().title()
-        isbn = input('Código de ISBN: ')
+        isbn = input('Código de IBSN: ')
 
         books.append(livro, autor, data_publicação, genero, isbn)       
-        print(f'Livro "\033[31m{livro}\033[m" adiconado com sucesso!')
+        print(f'Livro "\033[31m{livro}\033[m" adicionado com sucesso!')
 
     elif escolha == '2':
         excluir = input('Qual livro você deseja remover? ').strip().title()
@@ -36,7 +36,7 @@ while True:
         books.remove(excluir)
     
     elif escolha == '3':
-        busca = input('Qual livro você procura? Digite o nome ou o código de ISBN').strip().title()
+        busca = input('Qual livro você procura? Digite o nome ou o código de IBSN').strip().title()
         books.search(busca)
 
     elif escolha == '4':
